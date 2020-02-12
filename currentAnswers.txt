@@ -1,0 +1,94 @@
+100 marks in total broken down to 10 marks per query
+Deductions for each query are applied as follows:
+  - does not run (-10)
+  - uses temporary tables or views (-10)
+  - Q1-3: uses aggregation functions, grouping or nesting (-10)
+  - Q1-Q8: defines or uses views (-10)
+  - produces incorrect result in our testing (-5)
+  - query's approach not close to a correct solution (-2)
+  - uses unnecessary tables or is overly complicated (-1)
+  - unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+  - not sufficiently tested (-1)
+  - Q10: does not use the view from Q9 (-5)
+
+
+
+
+users(email, name, pwd, city, gender)
+
+products(pid, descr)
+
+sales(sid, lister, pid, edate, descr, cond, rprice)
+
+bids(bid, bidder, sid, bdate, amount)
+
+items(sid, no, pid, descr)
+
+reviews(reviewer, reviewee, rating, rtext, rdate)
+
+previews(rid, pid, reviewer, rating, rtext, rdate)
+
+endorses(rid, endorser)
+
+
+
+SELECT S.name, E.cid
+FROM Students S, Enrolled E
+WHERE S.sid=E.sid AND E.grade='A';
+
+
+
+1) SELECT U.email, U.name
+	FROM users U, sales S 
+	WHERE S.sid=B.sid AND S.lister=B.bidder AND S.lister=U.email AND B.bidder=U.email;
+
+2) SELECT S.sid, S.lister, S.cond, S.rprice 
+	FROM sales S, bids B, users U 
+	WHERE S.descr LIKE '%ticket%' AND S.sid=B.sid AND B.bidder=U.email AND U.city LIKE '%Edmonton%' OR S.descr LIKE '%voucher%' AND S.sid=B.sid AND B.bidder=U.email AND U.city LIKE '%Edmonton%';
+
+// should return s05 (bidder davood, from edmonton)
+
+
+// GIVES ERROR BECAUES THE ‘ ARE DIFFERENT FONT THAN IN TERMINAL
+// problem here is with the og first block, it prints cus it’s treating descr has ticket or all the rest - we want each to have the rest stuff like ‘ticket and sid and ..’ rn it’s just ‘ticket or (voucher and sid and ..)’
+// THE multilpe printing is for some reason by including multipe tables, if we remove bids and users it prints once
+
+
+3) - end within 3 days
+	- all bids, if any, are less than wanted rprice
+	- check out date and time functions in sqlite
+	- i think edate in sales is end date?
+SELECT S.sid, S.lister
+FROM sales S, bids B
+WHERE DATE('now', '+3 day') >= DATE(S.edate) AND DATE(S.edate) >= DATE('now');
+
+
+SELECT S.sid, S.lister
+FROM sales S, bids B
+WHERE NOT EXISTS ( SELECT *
+FROM bids
+WHERE S.sid=bids.sid ) OR S.sid=B.sid AND B.amount<S.rprice;
+
+SELECT sales.sid, sales.lister
+FROM sales, bids
+WHERE sales.sid=bids.sid AND bids.amount<sales.rprice OR NOT EXISTS ( SELECT 1
+FROM bids
+WHERE sales.sid=bids.sid );
+
+// problem is it prints the same number of bids entries there are
+
+// should return s06, ends 2020-02-13 --> this won't work after tomorrow
+// i could ignore the "without bids" case and just do lower bids
+
+
+
+
+
+4) SELECT S.sid, S.descr, S.cond,
+	FROM sales S, bids B
+	WHERE 
+
+
+
+
+// maybe do the left outter join, then do IF not null THEN Select _____
