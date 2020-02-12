@@ -58,6 +58,7 @@ WHERE S.sid=E.sid AND E.grade='A';
 	- all bids, if any, are less than wanted rprice
 	- check out date and time functions in sqlite
 	- i think edate in sales is end date?
+
 SELECT S.sid, S.lister
 FROM sales S, bids B
 WHERE DATE('now', '+3 day') >= DATE(S.edate) AND DATE(S.edate) >= DATE('now');
