@@ -10,3 +10,6 @@ WHERE S1.pid=S2.pid;
 
 
 --this isn't right - read the question again
+
+
+-- not done

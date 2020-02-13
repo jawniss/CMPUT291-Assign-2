@@ -9,3 +9,6 @@ WHERE DATE('now', '+3 day') >= DATE(S.edate)
 -- FROM bids
 -- WHERE S.sid=bids.sid )"
 -- attempt to include sales without bids
+
+
+-- possibly done

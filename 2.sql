@@ -10,3 +10,5 @@ OR S.descr LIKE '%voucher%'
 AND S.sid=B.sid
 AND B.bidder=U.email
 AND U.city LIKE '%Edmonton%';
+
+-- possibly done

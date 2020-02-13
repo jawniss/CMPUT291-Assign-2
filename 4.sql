@@ -8,3 +8,6 @@ FROM sales S, bids B
 WHERE JulianDay(S.edate) >= JulianDay('now');
 
 -- currently doesn't work if sale has no bid on it
+
+
+-- possibly done
