@@ -1,4 +1,4 @@
-
+.print Question 2 - johnas
 
 SELECT S.sid, S.lister, S.cond, S.rprice
 FROM sales S, bids B, users U

@@ -1,4 +1,4 @@
-
+.print Question 1 - johnas
 
 SELECT U.email, U.name
 FROM users U, sales S

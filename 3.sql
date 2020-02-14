@@ -1,3 +1,5 @@
+.print Question 3 - johnas
+
 SELECT S.sid, S.lister
 FROM sales S, bids B
 WHERE DATE('now', '+3 day') >= DATE(S.edate)

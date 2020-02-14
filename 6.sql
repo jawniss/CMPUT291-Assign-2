@@ -27,7 +27,7 @@
 --
 -- -- GOOD FOR RATING
 
-
+.print Question 6 - johnas
 
 SELECT sales.sid
 FROM sales

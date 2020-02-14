@@ -1,3 +1,5 @@
+.print Question 8 - johnas
+
 SELECT users.email,
   AVG(reviews.rating)
 FROM users

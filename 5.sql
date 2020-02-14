@@ -1,15 +1,18 @@
--- we don't need to reference multiple tables, just look
--- at sales since it has pid. compare the pids, then
--- see if the difference in value is more than twice
+.print Question 5 - johnas
 
-SELECT S1.sid, S1.lister, S1.pid, S1.bid
-FROM sales S1
-  INNER JOIN sales S2 on
-      S1.bid>2*S2.bid
-WHERE S1.pid=S2.pid;
+SELECT S1.sid, S1.lister, S1.pid, bids.bid
+FROM sales S1, bids
+  LEFT OUTER JOIN sales S2 ON S1.pid=S2.pid
+  GROUP BY S1.sid
+HAVING S1.sid=bids.sid
+AND bids.amount < 2 * (SELECT bids.amount
+FROM bids
+WHERE bids.sid=S2.sid);
 
 
 --this isn't right - read the question again
 
 
 -- not done
+-- underavlued if highest bid of s1 is less than
+-- half highest bid on s2

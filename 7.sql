@@ -1,10 +1,14 @@
+.print Question 7 - johnas
+
 SELECT U.email,
-SUM ( (SELECT COUNT(*) FROM bids WHERE bids.bidder=U.email) ) as BidNum,
-SUM ( (SELECT COUNT(*) FROM bids WHERE bids.bidder=U.email
-AND bids.amount=MAX(bids.amount)
-AND DATE(sales.edate) < DATE('now')
-AND bids.amount>=sales.rprice) )
+COUNT(DISTINCT case when U.email=bids.bidder then 1 else null end) as BidNum,
+-- SUM ( (SELECT COUNT(*) FROM bids WHERE bids.bidder=U.email
+-- AND bids.amount=MAX(bids.amount)
+-- AND DATE(sales.edate) < DATE('now')
+-- AND bids.amount>=sales.rprice) )
 -- SUM( (WINNING BIDS) )
+COUNT(case when U.email=bids.bidder
+AND bids.amount= (SELECT MAX(bids.amount) from bids) then 1 else null end) as WinningBids
 FROM users U, sales, bids
 WHERE DATE(sales.edate) < DATE('now');
 
