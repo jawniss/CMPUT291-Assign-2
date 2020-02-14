@@ -6,6 +6,3 @@ WHERE S.sid=B.sid
 AND S.lister=B.bidder
 AND S.lister=U.email
 AND B.bidder=U.email;
-
-
--- possibly done

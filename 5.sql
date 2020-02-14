@@ -8,12 +8,3 @@ HAVING S1.sid=bids.sid
 AND bids.amount < 2 * (SELECT bids.amount
 FROM bids
 WHERE bids.sid=S2.sid);
-
-
---this isn't right - read the question again
-
-
--- not done
--- underavlued if highest bid of s1 is less than
--- half highest bid on s2
-instead look for highest bids on a product 

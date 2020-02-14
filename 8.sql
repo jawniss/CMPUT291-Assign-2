@@ -8,5 +8,3 @@ GROUP BY users.name
 HAVING COUNT(users.email=reviews.reviewee) >= 3
 ORDER BY AVG(reviews.rating) DESC
 LIMIT 5;
-
--- I think this is working
