@@ -16,3 +16,4 @@ WHERE bids.sid=S2.sid);
 -- not done
 -- underavlued if highest bid of s1 is less than
 -- half highest bid on s2
+instead look for highest bids on a product 
